@@ -3,7 +3,7 @@
   when: ansible_distribution == 'Debian'
 
 - name: Ensure sensu is installed
-  apt: package=sensu state=latest
+  apt: package=sensu state="{{ sensu_version }}"
   notify: sensu cleanup
 
 - name: Ensure sensu-client starts at boot

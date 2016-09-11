@@ -1,4 +1,5 @@
 ---
+sensu_version: latest
 sensu_client_gems: 
   - sys-filesystem
 sensu_client_checks:
