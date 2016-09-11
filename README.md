@@ -1,22 +1,24 @@
 Sensu Client
 =========
 
-Ansible role for Sensu Clients
+Ansible role for Sensu Clients. Tested on Debian 8 only. 
 
 Requirements
 ------------
 
-TBD
+* Configured Sensu master server(s)
+* Requires SSL cert/key pair trusted by the RabbitMQ server. 
+* Use `sensu_client_rabbitmq_ssl_cert` and `sensu_client_rabbitmq_ssl_key` 
 
 Role Variables
 --------------
 
-TBD
+See `vars/main.yml`
 
 Dependencies
 ------------
 
-TBD
+Nothing at this time.
 
 Example Playbook
 ----------------
@@ -24,6 +26,7 @@ Example Playbook
     - hosts: client
       roles:
          - sensu-client
+           
 
 License
 -------
