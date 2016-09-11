@@ -26,7 +26,7 @@ Example Playbook
     - hosts: client
       roles:
          - sensu-client
-           sensu_client_rabbitmq_host: mycoool.rabbotmq.host.com
+           sensu_client_rabbitmq_host: mycoool.rabbitmq.host.com
            
 
 License
