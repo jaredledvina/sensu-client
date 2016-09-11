@@ -1,0 +1,15 @@
+---
+
+- name: restart sensu-client
+  service: name=sensu-client state=restarted
+
+- name: sensu cleanup
+  file: path="{{ item }}"
+        state=absent
+  with_items:
+    - /etc/sensu/config.json.example
+    - /etc/sensu/conf.d/README.md
+    - /etc/sensu/plugins
+    - /etc/sensu/mutators
+    - /etc/sensu/handlers
+    - /etc/sensu/extensions

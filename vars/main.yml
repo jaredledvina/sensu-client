@@ -1,0 +1,17 @@
+---
+sensu_client_gems: 
+  - sys-filesystem
+sensu_client_checks:
+  - disk-checks
+  - process-checks
+  - entropy-checks
+  - load-checks
+  - docker
+
+sensu_client_rabbitmq_ssl_cert: /etc/sensu/ssl/cert.pem
+sensu_client_rabbitmq_ssl_key: /etc/sensu/ssl/key.pem
+sensu_client_rabbitmq_host: localhost
+sensu_client_rabbitmq_port: 5671
+sensu_client_rabbitmq_vhost: /sensu
+sensu_client_rabbitmq_user: sensu
+sensu_client_rabbitmq_password: sensu
