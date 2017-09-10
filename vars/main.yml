@@ -1,13 +1,15 @@
 ---
 sensu_version: latest
 sensu_client_gems: 
-  - sys-filesystem
+  - sensu-plugin
+
 sensu_client_checks:
-  - disk-checks
-  - process-checks
-  - entropy-checks
-  - load-checks
-  - docker
+  - sensu-plugins-process-checks
+
+sensu_client:
+  name: "{{ ansible_hostname }}"
+  address: "{{ ansible_default_ipv4.address }}"
+  subscriptions: ['all']
 
 sensu_client_transport:
   name: rabbitmq
