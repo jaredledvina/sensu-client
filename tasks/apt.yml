@@ -1,8 +1,10 @@
 ---
 - name: Ensure sensu APT key exists
-  apt_key: url=https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
-           id=0xA20F259AEB9C94BB
+  apt_key: 
+    url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+    id: 0xA20F259AEB9C94BB
 
 - name: Ensure sensu apt config exists
-  apt_repository: repo='deb http://repositories.sensuapp.org/apt sensu main'
+  apt_repository: 
+    repo: 'deb http://repositories.sensuapp.org/apt sensu main'
 
