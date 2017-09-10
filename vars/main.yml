@@ -9,7 +9,8 @@ sensu_client_checks:
 sensu_client:
   name: "{{ ansible_hostname }}"
   address: "{{ ansible_default_ipv4.address }}"
-  subscriptions: ['all']
+  subscriptions: 
+    - all
 
 sensu_client_transport:
   name: rabbitmq
