@@ -29,6 +29,6 @@ jobs:
           name: run tests
           command: |
             source venv/bin/activate
-            mkdir -p /etc/ansible/rolessensu-client && cp -r ~/repo/ /etc/ansibe/roles/sensu-client/
+            mkdir -p /etc/ansible/roles/sensu-client && cp -r ~/repo/ /etc/ansibe/roles/sensu-client/
             cd tests/
             ansible-playbook -v --connection=local -i localhost, playbook.yml
