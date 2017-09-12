@@ -1,12 +1,12 @@
 ---
 
 - name: restart sensu-client
-  service: 
+  service:
     name: sensu-client
     state: restarted
 
 - name: sensu cleanup
-  file: 
+  file:
     path: "{{ item }}"
     state: absent
   with_items:

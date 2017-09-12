@@ -1,6 +1,6 @@
 ---
 sensu_version: latest
-sensu_client_gems: 
+sensu_client_gems:
   - sensu-plugin
 
 sensu_client_checks:
@@ -9,7 +9,7 @@ sensu_client_checks:
 sensu_client:
   name: "{{ ansible_hostname }}"
   address: "{{ ansible_default_ipv4.address }}"
-  subscriptions: 
+  subscriptions:
     - all
 
 sensu_client_transport:
@@ -23,6 +23,6 @@ sensu_client_rabbitmq:
     vhost: /sensu
     user: sensu
     password: sensu
-    ssl: 
+    ssl:
       cert_chain_file: /etc/sensu/ssl/cert.pem
       private_key_file: /etc/sensu/ssl/key.pem
