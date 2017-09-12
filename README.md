@@ -1,3 +1,5 @@
+[![CircleCI](https://img.shields.io/circleci/project/github/jaredledvina/sensu-client.svg)](https://circleci.com/gh/jaredledvina/sensu-client)
+
 Sensu Client
 =========
 
