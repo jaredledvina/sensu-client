@@ -8,6 +8,8 @@
     state: "{{ sensu_version }}"
   notify: sensu cleanup
 
+- meta: flush_hanlders
+
 - name: Ensure sensu-client starts at boot
   service: 
     name: sensu-client 
