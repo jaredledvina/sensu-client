@@ -1,10 +1,16 @@
--   repo: git://github.com/pre-commit/pre-commit-hooks
-    sha: v0.9.3
-    hooks:
-      - id: trailing-whitespace
-      - id: check-json
-      - id: check-merge-conflict
-      - id: check-symlinks
-      - id: check-yaml
-      - id: end-of-file-fixer
-      - id: trailing-whitespace
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  sha: v0.9.3
+  hooks:
+    - id: trailing-whitespace
+    - id: check-json
+    - id: check-merge-conflict
+    - id: check-symlinks
+    - id: check-yaml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+
+- repo: https://github.com/willthames/ansible-lint.git
+  sha: v3.4.15
+  hooks:
+    - id: ansible-lint
+      files: \.(yaml|yml)$
