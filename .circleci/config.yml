@@ -1,0 +1,31 @@
+version: 2.0
+jobs:
+  build:
+    - image: debian:strech
+  working_directory: ~/repo
+  steps:
+    - checkout
+
+    # Download and cache dependencies
+    - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "tests/requirements.txt" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+    - run:
+        name: Install Python deps in a venv
+        command: |
+          apt-get update -qq
+          apt-get install -y --no-install-recommends virtualenv python-pip python-dev build-essential libffi-dev libssl-dev libpq-dev net-tools
+          virtualenv env
+          source env/bin/activate
+          pip install -r tests/requirements.txt
+    - save_cache:
+        paths:
+          - ./venv
+        key: v1-dependencies-{{ checksum "tests/requirements.txt" }}
+    - run:
+        name: run tests
+        command: |
+          source env/bin/activate
+          ansible-playbook -v --connection=local -i localhost, tests/playbook.yml
