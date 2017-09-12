@@ -50,7 +50,7 @@
   gem:
     executable: /opt/sensu/embedded/bin/gem
     name: "{{ item }}"
-    state: installed
+    state: present
   with_items: "{{ sensu_client_gems }}"
 
 - name: Ensure checks are installed
