@@ -19,7 +19,7 @@ jobs:
             apt-get update -qq
             apt-get install -y --no-install-recommends virtualenv python-pip python-dev build-essential libffi-dev libssl-dev libpq-dev net-tools
             virtualenv venv
-            source env/bin/activate
+            source venv/bin/activate
             pip install -r requirements.txt
       - save_cache:
           paths:
