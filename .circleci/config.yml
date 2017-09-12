@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: debian:strech
+      - image: debian:stretch
     steps:
       - checkout
 
