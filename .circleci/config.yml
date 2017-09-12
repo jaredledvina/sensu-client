@@ -29,5 +29,4 @@ jobs:
           name: run tests
           command: |
             source venv/bin/activate
-            ansible-galaxy install -r tests/requirements.yml
             ansible-playbook -v --connection=local -i localhost, tests/playbook.yml
