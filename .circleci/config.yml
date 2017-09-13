@@ -7,8 +7,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
+          #keys:
+              #- v1-dependencies-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
+          key:
             - v1-dependencies-
       - run:
           name: Install Python deps in a venv
