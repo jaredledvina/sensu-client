@@ -6,8 +6,6 @@ jobs:
       - image: debian:stretch
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
