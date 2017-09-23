@@ -11,5 +11,5 @@
 - name: Ensure Sensu is installed
   yum:
     name: sensu
-    state: "{{ sensu_state }}"
+    state: "{{ sensu_client_state }}"
   notify: Sensu cleanup
