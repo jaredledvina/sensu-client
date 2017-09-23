@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: debian:stretch
+      - image: williamyeh/ansible:debian9
     steps:
       - checkout
       - run:
@@ -11,43 +11,13 @@ jobs:
           command: |
             apt-get update -qq
             apt-get install -y ca-certificates
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
-            - v1-dependencies-
       - run:
-          name: Install Python deps in a venv
+          name: Install sensu-client deps
           command: |
-            apt-get install -y --no-install-recommends virtualenv python-pip python-dev build-essential libffi-dev libssl-dev libpq-dev net-tools procps gnupg
-            virtualenv venv
-            source venv/bin/activate
-            pip install -r tests/requirements.txt
-      - save_cache:
-          paths:
-            - venv
-          key: v1-dependencies-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
-  test:
-    working_directory: ~/repo
-    docker:
-      - image: debian:stretch
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
-            - v1-dependencies-
+            apt-get install -y --no-install-recommends procps
       - run:
           name: run tests
           command: |
-            source venv/bin/activate
             mkdir -p /etc/ansible/roles/sensu-client && cp -r ~/repo/* /etc/ansible/roles/sensu-client/
             cd tests/
             ansible-playbook -v --connection=local -i localhost, playbook.yml
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
