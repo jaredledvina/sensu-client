@@ -30,7 +30,7 @@
 
 - name: Ensure client rabbitmq config exists
   template:
-    src: transport.json.j2
+    src: rabbitmq.json.j2
     dest: /etc/sensu/conf.d/rabbitmq.json
     owner: sensu
     group: sensu
