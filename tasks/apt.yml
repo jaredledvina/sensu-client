@@ -13,3 +13,9 @@
   apt_repository:
     filename: sensu
     repo: 'deb https://repositories.sensuapp.org/apt sensu main'
+
+- name: Ensure Sensu is installed
+  apt:
+    package: sensu
+    state: "{{ sensu_state }}"
+  notify: Sensu cleanup

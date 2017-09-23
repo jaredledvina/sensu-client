@@ -1,5 +1,5 @@
 ---
-sensu_version: latest
+sensu_state: latest
 sensu_client_gems:
   - sensu-plugin
 

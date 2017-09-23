@@ -1,0 +1,15 @@
+---
+- name: Ensure Sensu yum repo exists
+  yum_repository:
+    name: sensu
+    description: Sensu Core Repository
+    baseurl: https://repositories.sensuapp.org/yum/
+    gpgkey: https://repositories.sensuapp.org/yum/pubkey.gpg
+    gpgcheck: yes
+    enabled: yes
+
+- name: Ensure Sensu is installed
+  yum:
+    name: sensu
+    state: "{{ sensu_state }}"
+  notify: Sensu cleanup

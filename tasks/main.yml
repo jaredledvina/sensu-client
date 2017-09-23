@@ -1,12 +1,6 @@
 ---
 - include: "{{ ansible_pkg_mgr }}.yml"
 
-- name: Ensure Sensu is installed
-  apt:
-    package: sensu
-    state: "{{ sensu_version }}"
-  notify: Sensu cleanup
-
 - meta: flush_handlers
 
 - name: Ensure sensu-client starts at boot
