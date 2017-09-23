@@ -71,30 +71,30 @@
     group: sensu
     mode: 0660
 
-- name: Ensure {{ sensu_client.rabbitmq.ssl.cert_chain_file }} exists
+- name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }} exists
   template:
     src: cert_chain_file.j2
-    dest: "{{ sensu_client_rabbitmq.ssl.cert_chain_file }}"
+    dest: "{{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }}"
     owner: sensu
     group: sensu
     mode: 0660
     validate: '/usr/bin/openssl x509 -noout -in %s'
   notify: restart sensu-client
   when:
-    - sensu_client.rabbitmq.ssl.cert_chain_file is defined
+    - sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file is defined
     - sensu_client_rabbitmq_cert_chain is defined
 
-- name: Ensure {{ sensu_client.rabbitmq.ssl.private_key_file }} exists
+- name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.private_key_file }} exists
   template:
     src: private_key_file.j2
-    dest: "{{ sensu_client_rabbitmq.ssl.private_key_file }}"
+    dest: "{{ sensu_client_rabbitmq.rabbitmq.ssl.private_key_file }}"
     owner: sensu
     group: sensu
     mode: 0660
     validate: '/usr/bin/openssl rsa -noout -in %s'
   notify: restart sensu-client
   when:
-    - sensu_client.rabbitmq.ssl.private_key_file is defined
+    - sensu_client_rabbitmq.rabbitmq.ssl.private_key_file is defined
     - sensu_client_rabbitmq_private_key is defined
 
 - name: Ensure sensu-client is running
