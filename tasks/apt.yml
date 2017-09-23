@@ -1,8 +1,15 @@
 ---
-- name: Ensure sensu APT key exists
+- name: Ensure Sensu apt-key exists
   apt_key:
+    id: 0xA20F259AEB9C94BB
     url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
 
-- name: Ensure sensu apt config exists
+- name: Ensure apt-transport-https is installed
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Ensure Sensu apt-repo exists
   apt_repository:
-    repo: 'deb http://repositories.sensuapp.org/apt sensu main'
+    filename: sensu
+    repo: 'deb https://repositories.sensuapp.org/apt sensu main'
