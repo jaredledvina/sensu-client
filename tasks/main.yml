@@ -59,6 +59,30 @@
     group: sensu
     mode: 0660
 
+- name: Ensure {{ sensu_client_rabbitmq.ssl.cert_chain_file }} exists
+  template:
+    src: cert_chain_file.j2
+    dest: "{{ sensu_client_rabbitmq.ssl.cert_chain_file }}"
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/usr/bin/openssl x509 -noout -in %s'
+  when:
+    - sensu_client_rabbitmq.ssl.cert_chain_file is defined
+    - sensu_client_rabbitmq_cert_chain is defined
+
+- name: Ensure {{ sensu_client_rabbitmq.ssl.private_key_file }} exists
+  template:
+    src: private_key_file.j2
+    dest: "{{ sensu_client_rabbitmq.ssl.private_key_file }}"
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/usr/bin/openssl rsa -noout -in %s'
+  when:
+    - sensu_client_rabbitmq.ssl.private_key_file is defined
+    - sensu_client_rabbitmq_private_key is defined
+
 - name: Ensure sensu-client is running
   service:
     name: sensu-client
