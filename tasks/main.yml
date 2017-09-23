@@ -2,11 +2,11 @@
 - include: apt.yml
   when: ansible_distribution == 'Debian'
 
-- name: Ensure sensu is installed
+- name: Ensure Sensu is installed
   apt:
     package: sensu
     state: "{{ sensu_version }}"
-  notify: sensu cleanup
+  notify: Sensu cleanup
 
 - meta: flush_handlers
 
@@ -58,6 +58,13 @@
   register: sensu_install
   changed_when: "'installing Sensu gem' in sensu_install.stdout"
   with_items: "{{ sensu_client_checks }}"
+
+- name: Ensure /tmp/sensu_client_loaded_files is owned by sensu
+  file:
+    path: /tmp/sensu_client_loaded_files
+    owner: sensu
+    group: sensu
+    mode: 0660
 
 - name: Ensure sensu-client is running
   service:

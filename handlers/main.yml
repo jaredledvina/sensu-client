@@ -5,7 +5,7 @@
     name: sensu-client
     state: restarted
 
-- name: sensu cleanup
+- name: Sensu cleanup
   file:
     path: "{{ item }}"
     state: absent
