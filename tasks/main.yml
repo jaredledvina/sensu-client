@@ -1,5 +1,5 @@
 ---
-- include_tasks: "{{ ansible_pkg_mgr }}.yml"
+- include: "{{ ansible_pkg_mgr }}.yml"
 
 - meta: flush_handlers
 
