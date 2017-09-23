@@ -17,5 +17,5 @@
 - name: Ensure Sensu is installed
   apt:
     package: sensu
-    state: "{{ sensu_client_tate }}"
+    state: "{{ sensu_client_state }}"
   notify: Sensu cleanup
