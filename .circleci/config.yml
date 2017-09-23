@@ -13,19 +13,22 @@ jobs:
           name: run tests
           command: |
             ansible-playbook -v --connection=local -i localhost, tests/playbook.yml
-  centos7:
-    working_directory: /etc/ansible/roles/sensu-client/
-    docker:
-      - image: williamyeh/ansible:centos7
-    steps:
-      - checkout
-      - run:
-          name: run tests
-          command: |
-            ansible-playbook -v --connection=local -i localhost, tests/playbook.yml
+# Unable to test CentOS7 due to SystemD requiring /sys/fs/cgroup/ to be mounted
+# in teh container which is not allowed via CircleCI's docker integration
+# See: https://discuss.circleci.com/t/docker-with-centos7-systemd-container/885
+#  centos7:
+#    working_directory: /etc/ansible/roles/sensu-client/
+#    docker:
+#      - image: williamyeh/ansible:centos7
+#    steps:
+#      - checkout
+#      - run:
+#          name: run tests
+#          command: |
+#            ansible-playbook -v --connection=local -i localhost, tests/playbook.yml
 workflows:
   version: 2
   distro_tests:
       jobs:
-        - debian9
-        - centos7
+        - debian
+#        - centos7
