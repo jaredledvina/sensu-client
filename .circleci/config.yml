@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install sensu-client deps
-          command: apt-get install -y --no-install-recommends procps
+          command: apt-get update -qq && apt-get install -y --no-install-recommends procps
       - run:
           name: run tests
           command: |
@@ -19,9 +19,6 @@ jobs:
       - image: williamyeh/ansible:centos7
     steps:
       - checkout
-      - run:
-          name: Install sensu-client deps
-          command: yum install -y proctools
       - run:
           name: run tests
           command: |
