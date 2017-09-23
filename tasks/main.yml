@@ -39,6 +39,18 @@
   notify: restart sensu-client
   when: sensu_client_transport.name == 'rabbitmq'
 
+- name: Ensure client check configs exist
+  template:
+    src: check.json.j2
+    dest: /etc/sensu/conf.d/check_{{ item.key }}.json
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+  notify: restart sensu-client
+  when: sensu_client_checks is defined
+  with_dict: "{{ sensu_client_checks }}"
+
 - name: Install required gems
   gem:
     executable: /opt/sensu/embedded/bin/gem
@@ -46,11 +58,11 @@
     state: present
   with_items: "{{ sensu_client_gems }}"
 
-- name: Ensure checks are installed
+- name: Ensure check plugins are installed
   command: sensu-install -p {{ item }}
   register: sensu_install
   changed_when: "'installing Sensu gem' in sensu_install.stdout"
-  with_items: "{{ sensu_client_checks }}"
+  with_items: "{{ sensu_client_check_plugins }}"
 
 - name: Ensure /tmp/sensu_client_loaded_files is owned by sensu
   file:
@@ -67,6 +79,7 @@
     group: sensu
     mode: 0660
     validate: '/usr/bin/openssl x509 -noout -in %s'
+  notify: restart sensu-client
   when:
     - sensu_client_rabbitmq.ssl.cert_chain_file is defined
     - sensu_client_rabbitmq_cert_chain is defined
@@ -79,6 +92,7 @@
     group: sensu
     mode: 0660
     validate: '/usr/bin/openssl rsa -noout -in %s'
+  notify: restart sensu-client
   when:
     - sensu_client_rabbitmq.ssl.private_key_file is defined
     - sensu_client_rabbitmq_private_key is defined

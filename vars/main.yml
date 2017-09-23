@@ -3,7 +3,7 @@ sensu_client_state: latest
 sensu_client_gems:
   - sensu-plugin
 
-sensu_client_checks:
+sensu_client_check_plugins:
   - sensu-plugins-process-checks
 
 sensu_client:
