@@ -1,7 +1,7 @@
 ---
 - name: Ensure Sensu apt-key exists
   apt_key:
-    id: 0xA20F259AEB9C94BB
+    id: EB9C94BB
     url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
 
 - name: Ensure apt-transport-https is installed
