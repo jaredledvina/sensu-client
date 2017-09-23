@@ -1,5 +1,18 @@
 version: 2.0
 jobs:
+  debian8:
+    working_directory: /etc/ansible/roles/sensu-client/
+    docker:
+      - image: williamyeh/ansible:debian8
+    steps:
+      - checkout
+      - run:
+          name: Install sensu-client deps
+          command: apt-get update -qq && apt-get install -y --no-install-recommends procps
+      - run:
+          name: run tests
+          command: |
+            ansible-playbook -v --connection=local -i localhost, tests/playbook.yml
   debian9:
     working_directory: /etc/ansible/roles/sensu-client/
     docker:
@@ -30,5 +43,6 @@ workflows:
   version: 2
   distro_tests:
       jobs:
-        - debian
+        - debian8
+        - debian9
 #        - centos7
