@@ -3,7 +3,7 @@
 Sensu Client
 =========
 
-Ansible role for Sensu Clients. Tested on Debian 8 only.
+Ansible role for Sensu Clients. Tested on Debian 8, Debian 9, and Ubuntu 14.04 only.
 
 Requirements
 ------------
