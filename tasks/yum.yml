@@ -3,7 +3,7 @@
   yum_repository:
     name: sensu
     description: Sensu Core Repository
-    baseurl: https://repositories.sensuapp.org/yum/
+    baseurl: http://repositories.sensuapp.org/yum/$releasever/$basearch/
     gpgkey: https://repositories.sensuapp.org/yum/pubkey.gpg
     gpgcheck: yes
     enabled: yes
