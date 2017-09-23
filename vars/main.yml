@@ -30,6 +30,9 @@ sensu_client_rabbitmq:
     vhost: /sensu
     user: sensu
     password: sensu
-    ssl:
-      cert_chain_file: /etc/sensu/ssl/cert.pem
-      private_key_file: /etc/sensu/ssl/key.pem
+# If you want to use SSL with RabbitMQ you *must* also define:
+# sensu_client_rabbitmq_private_key
+# sensu_client_rabbitmq_cert_chain
+#    ssl:
+#      cert_chain_file: /etc/sensu/ssl/cert.pem
+#      private_key_file: /etc/sensu/ssl/key.pem

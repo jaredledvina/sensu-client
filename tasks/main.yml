@@ -81,8 +81,8 @@
     validate: '/usr/bin/openssl x509 -noout -in %s'
   notify: restart sensu-client
   when:
-    - sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file is defined
     - sensu_client_rabbitmq_cert_chain is defined
+    - sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file is defined
 
 - name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.private_key_file }} exists
   template:
@@ -94,8 +94,8 @@
     validate: '/usr/bin/openssl rsa -noout -in %s'
   notify: restart sensu-client
   when:
-    - sensu_client_rabbitmq.rabbitmq.ssl.private_key_file is defined
     - sensu_client_rabbitmq_private_key is defined
+    - sensu_client_rabbitmq.rabbitmq.ssl.private_key_file is defined
 
 - name: Ensure sensu-client is running
   service:
