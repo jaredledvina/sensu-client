@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Install Python deps in a venv
           command: |
-            apt-get install -y --no-install-recommends virtualenv python-pip python-dev build-essential libffi-dev libssl-dev libpq-dev net-tools gpg
+            apt-get install -y --no-install-recommends virtualenv python-pip python-dev build-essential libffi-dev libssl-dev libpq-dev net-tools procps gnupg
             virtualenv venv
             source venv/bin/activate
             pip install -r tests/requirements.txt
