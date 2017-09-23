@@ -39,9 +39,9 @@ jobs:
             mkdir -p /etc/ansible/roles/sensu-client && cp -r ~/repo/* /etc/ansible/roles/sensu-client/
             cd tests/
             ansible-playbook -v --connection=local -i localhost, playbook.yml
-  workflows:
-    version: 2
-    build_and_test:
-      jobs:
-        - build
-        - test
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
