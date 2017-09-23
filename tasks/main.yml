@@ -48,8 +48,8 @@
     mode: 0660
     validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
   notify: restart sensu-client
-  when: sensu_client_checks is defined
   with_dict: "{{ sensu_client_checks }}"
+  when: sensu_client_checks is defined
 
 - name: Install required gems
   gem:
@@ -57,12 +57,14 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ sensu_client_gems }}"
+  when: sensu_client_gems is defined
 
-- name: Ensure check plugins are installed
+- name: Ensure plugins are installed
   command: sensu-install -p {{ item }}
   register: sensu_install
   changed_when: "'installing Sensu gem' in sensu_install.stdout"
-  with_items: "{{ sensu_client_check_plugins }}"
+  with_items: "{{ sensu_client_plugins }}"
+  when: sensu_client_plugins is defined
 
 - name: Ensure /tmp/sensu_client_loaded_files is owned by sensu
   file:
