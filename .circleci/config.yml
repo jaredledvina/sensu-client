@@ -6,6 +6,9 @@ jobs:
       - image: debian:stretch
     steps:
       - checkout
+      - run:
+          name: Install ca-certificates to unfuck restore_cache
+          command: apt-get install -y ca-certificates
       - restore_cache:
           keys:
             - v1-dependencies-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
