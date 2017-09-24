@@ -1,7 +1,6 @@
 ---
 services: docker
 env:
-  - distro: fedora24
   - distro: centos6
   - distro: centos7
   - distro: ubuntu1204
