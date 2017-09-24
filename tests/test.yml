@@ -8,4 +8,9 @@
         update_cache: yes
       when: ansible_os_family == 'Debian'
   roles:
-    - role_under_test
+    - role: role_under_test
+      sensu_client:
+        name: test-host
+        address: 127.0.0.1
+        subscriptions:
+          - all
