@@ -1,0 +1,78 @@
+---
+- name: Ensure client config exists
+  template:
+    src: client.json.j2
+    dest: /etc/sensu/conf.d/client.json
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+  notify: restart sensu-client
+
+- name: Ensure client transport config exists
+  template:
+    src: transport.json.j2
+    dest: /etc/sensu/conf.d/transport.json
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+  notify: restart sensu-client
+
+- name: Ensure client rabbitmq config exists
+  template:
+    src: rabbitmq.json.j2
+    dest: /etc/sensu/conf.d/rabbitmq.json
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+  notify: restart sensu-client
+  when: sensu_client_transport.name == 'rabbitmq'
+
+- name: Ensure client check configs exist
+  template:
+    src: check.json.j2
+    dest: /etc/sensu/conf.d/check_{{ item.key }}.json
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+  notify: restart sensu-client
+  with_dict: "{{ sensu_client_checks }}"
+  when: sensu_client_checks is defined
+
+- name: Ensure client extensions config exists
+  template:
+    src: extensions.json.j2
+    dest: /etc/sensu/conf.d/extensions.json
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+
+- name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }} exists
+  template:
+    src: cert_chain_file.j2
+    dest: "{{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }}"
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/usr/bin/openssl x509 -noout -in %s'
+  notify: restart sensu-client
+  when:
+    - sensu_client_rabbitmq_cert_chain is defined
+    - sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file is defined
+
+- name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.private_key_file }} exists
+  template:
+    src: private_key_file.j2
+    dest: "{{ sensu_client_rabbitmq.rabbitmq.ssl.private_key_file }}"
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/usr/bin/openssl rsa -noout -in %s'
+  notify: restart sensu-client
+  when:
+    - sensu_client_rabbitmq_private_key is defined
+    - sensu_client_rabbitmq.rabbitmq.ssl.private_key_file is defined

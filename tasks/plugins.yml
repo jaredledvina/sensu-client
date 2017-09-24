@@ -1,0 +1,29 @@
+---
+- name: Install required gems
+  gem:
+    executable: /opt/sensu/embedded/bin/gem
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ sensu_client_gems }}"
+  when: sensu_client_gems is defined
+
+- name: Ensure plugins are installed
+  command: sensu-install --plugin {{ item }}
+  register: sensu_install
+  changed_when: "'installing Sensu gem' in sensu_install.stdout"
+  with_items: "{{ sensu_client_plugins }}"
+  when: sensu_client_plugins is defined
+
+- name: Ensure extensions are installed
+  command: sensu-install --extension {{ item }}
+  register: sensu_install
+  changed_when: "'installing Sensu gem' in sensu_install.stdout"
+  with_items: "{{ sensu_client_extensions }}"
+  when: sensu_client_extensions is defined
+
+- name: Ensure custom source plugins/extensions are installed
+  command: sensu-install --source {{ item }}
+  register: sensu_install
+  changed_when: "'installing Sensu gem' in sensu_install.stdout"
+  with_items: "{{ sensu_client_custom_source }}"
+  when: sensu_client_custom_source is defined
