@@ -1,13 +1,17 @@
 galaxy_info:
   author: Jared Ledvina
-  description: Dedicated role to configure sensu-client
+  description: Configures Sensu clients in a sane way
   license: MIT
-
   min_ansible_version: 2.4.0
   platforms:
+  - name: EL
+    versions:
+      - 6
+      - 7
   - name: Ubuntu
     versions:
       - trusty
+      - xenial
   - name: Debian
     versions:
       - jessie
