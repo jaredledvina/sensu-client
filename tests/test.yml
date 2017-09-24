@@ -1,4 +1,11 @@
 ---
 - hosts: all
+  pre_tasks:
+    - name: Ensure gpg is installed for apt-key
+      apt:
+        name: gnupg
+        state: installed
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
   roles:
     - role_under_test
