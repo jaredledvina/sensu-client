@@ -2,9 +2,9 @@ galaxy_info:
   author: Jared Ledvina
   description: Configures Sensu clients in a sane way
   license: MIT
-  min_ansible_version: 2.4.0
+  min_ansible_version: 2.3.0
   platforms:
-  - name: EL
+  - name: CentOS
     versions:
       - 6
       - 7
