@@ -60,6 +60,3 @@ workflows:
         - debian9
         - ubuntu14.04
 #        - centos7
-notify:
-  webhooks:
-    - url: https://galaxy.ansible.com/api/v1/notifications/
