@@ -95,12 +95,18 @@
   with_items: "{{ sensu_client_custom_source }}"
   when: sensu_client_custom_source is defined
 
+- name: Check if /tmp/sensu_client_loaded_files exists
+  stat:
+    path: /tmp/sensu_client_loaded_files
+  register: sensu_client_loaded_file
+
 - name: Ensure /tmp/sensu_client_loaded_files is owned by sensu
   file:
     path: /tmp/sensu_client_loaded_files
     owner: sensu
     group: sensu
     mode: 0660
+  when: sensu_client_loaded_file.exists
 
 - name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }} exists
   template:
