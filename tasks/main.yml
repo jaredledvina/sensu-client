@@ -1,5 +1,9 @@
 ---
-- include_tasks: "{{ ansible_pkg_mgr }}.yml"
+- include: apt.yml
+  when: ansible_os_family == 'Debian'
+
+- include: yum.yml
+  when: ansible_os_family == 'RedHat'
 
 - meta: flush_handlers
 
