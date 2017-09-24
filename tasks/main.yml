@@ -106,7 +106,7 @@
     owner: sensu
     group: sensu
     mode: 0660
-  when: sensu_client_loaded_file.exists
+  when: sensu_client_loaded_file.stat.exists
 
 - name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }} exists
   template:
