@@ -15,7 +15,7 @@ sensu_client_checks:
 
 sensu_client:
   name: "{{ ansible_hostname }}"
-  address: "{{ ansible_default_ipv4.address | default(127.0.0.1) }}"
+  address: "{{ ansible_default_ipv4.address | default('127.0.0.1') }}"
   subscriptions:
     - all
 
