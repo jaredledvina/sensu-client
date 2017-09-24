@@ -51,6 +51,17 @@
   with_dict: "{{ sensu_client_checks }}"
   when: sensu_client_checks is defined
 
+- name: Ensure client extensions config exists
+  template:
+    src: extensions.json.j2
+    dest: /etc/sensu/conf.d/extensions.json
+    owner: sensu
+    group: sensu
+    mode: 0660
+    validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+  notify: restart sensu-client
+  when: sensu_client_extensions_config is defined
+
 - name: Install required gems
   gem:
     executable: /opt/sensu/embedded/bin/gem
@@ -60,11 +71,25 @@
   when: sensu_client_gems is defined
 
 - name: Ensure plugins are installed
-  command: sensu-install -p {{ item }}
+  command: sensu-install --plugin {{ item }}
   register: sensu_install
   changed_when: "'installing Sensu gem' in sensu_install.stdout"
   with_items: "{{ sensu_client_plugins }}"
   when: sensu_client_plugins is defined
+
+- name: Ensure extensions are installed
+  command: sensu-install --extension {{ item }}
+  register: sensu_install
+  changed_when: "'installing Sensu gem' in sensu_install.stdout"
+  with_items: "{{ sensu_client_extensions }}"
+  when: sensu_client_extensions is defined
+
+- name: Ensure custom source plugins/extensions are installed
+  command: sensu-install --source {{ item }}
+  register: sensu_install
+  changed_when: "'installing Sensu gem' in sensu_install.stdout"
+  with_items: "{{ sensu_client_custom_source }}"
+  when: sensu_client_custom_source is defined
 
 - name: Ensure /tmp/sensu_client_loaded_files is owned by sensu
   file:
