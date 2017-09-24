@@ -50,8 +50,9 @@
     group: sensu
     mode: 0660
     validate: '/opt/sensu/bin/sensu-client --validate_config -c %s'
+  when: sensu_client_extensions_config is defined
 
-- name: Ensure {{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }} exists
+- name:  Ensure {{ sensu_client_rabbitmq.rabbitmq.cert_chain_file }} exists
   template:
     src: cert_chain_file.j2
     dest: "{{ sensu_client_rabbitmq.rabbitmq.ssl.cert_chain_file }}"
