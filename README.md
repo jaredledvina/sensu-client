@@ -10,8 +10,6 @@ Requirements
 ------------
 
 * Configured Sensu master server(s)
-* Requires SSL cert/key pair trusted by the RabbitMQ server.
-* Use `sensu_client_rabbitmq_ssl_cert` and `sensu_client_rabbitmq_ssl_key`
 
 Role Variables
 --------------
@@ -30,12 +28,6 @@ Example Playbook
       roles:
          - sensu-client
            sensu_client_rabbitmq_host: mycoool.rabbitmq.host.com
-
-
-License
--------
-
-TBD
 
 
 Development:
