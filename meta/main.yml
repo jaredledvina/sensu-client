@@ -15,6 +15,7 @@ galaxy_info:
 
   galaxy_tags:
     - sensu
-    - sensu-client
+    - sensuclient
+    - monitoring
 
 dependencies: []
