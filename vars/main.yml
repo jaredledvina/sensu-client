@@ -7,6 +7,7 @@ sensu_client_plugins:
   - sensu-plugins-process-checks
 
 sensu_client_configs_dir: /etc/sensu/conf.d
+sensu_client_configs_overrides:
 sensu_client_configs:
   checks:
     sensu-website:

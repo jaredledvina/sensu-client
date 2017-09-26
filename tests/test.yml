@@ -9,8 +9,9 @@
       when: ansible_os_family == 'Debian'
   roles:
     - role: role_under_test
-      sensu_client:
-        name: test-host
-        address: 127.0.0.1
-        subscriptions:
-          - all
+      sensu_client_configs_overrides:
+        client:
+          name: test-host
+          address: 127.0.0.1
+          subscriptions:
+            - all
