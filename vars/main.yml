@@ -6,33 +6,31 @@ sensu_client_gems:
 sensu_client_plugins:
   - sensu-plugins-process-checks
 
-sensu_client_checks:
-  sensu-website:
-    command: check-http.rb -u https://sensuapp.org
-    subscribers:
+sensu_client_configs_dir: /etc/sensu/conf.d
+sensu_client_configs:
+  checks:
+    sensu-website:
+      command: check-http.rb -u https://sensuapp.org
+      subscribers:
+        - all
+      interval: 60
+  client:
+    name: "{{ ansible_hostname }}"
+    address: "{{ ansible_default_ipv4.address }}"
+    subscriptions:
       - all
-    interval: 60
-
-sensu_client:
-  name: "{{ ansible_hostname }}"
-  address: "{{ ansible_default_ipv4.address }}"
-  subscriptions:
-    - all
-
-sensu_client_transport:
-  name: rabbitmq
-  reconnect_on_error: true
-
-sensu_client_rabbitmq:
+  transport:
+    name: rabbitmq
+    reconnect_on_error: true
   rabbitmq:
     host: localhost
     port: 5671
     vhost: /sensu
     user: sensu
     password: sensu
-# If you want to use SSL with RabbitMQ you *must* also define:
-# sensu_client_rabbitmq_private_key
-# sensu_client_rabbitmq_cert_chain
-#    ssl:
-#      cert_chain_file: /etc/sensu/ssl/cert.pem
-#      private_key_file: /etc/sensu/ssl/key.pem
+#  If you want to use SSL with RabbitMQ you *must* also define:
+#  sensu_client_rabbitmq_private_key
+#  sensu_client_rabbitmq_cert_chain
+#     ssl:
+#       cert_chain_file: /etc/sensu/ssl/cert.pem
+#       private_key_file: /etc/sensu/ssl/key.pem
