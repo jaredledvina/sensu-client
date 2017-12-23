@@ -9,7 +9,7 @@
       when: ansible_os_family == 'Debian'
   roles:
     - role: role_under_test
-      sensu_client_configs_overrides:
+      sensu_client_configs_override:
         client:
           name: test-host
           address: 127.0.0.1

@@ -6,7 +6,7 @@
 
 - name: Ensure configs exists
   copy:
-    content: "{{ { 'item.key': item.value } | combine(sensu_client_configs_overrides) | to_nice_json }}"
+    content: "{{ item.key | combine(item.value) | to_nice_json }}"
     dest: "{{ sensu_client_configs_dir}}/{{ item.key }}.json"
     owner: sensu
     group: sensu
