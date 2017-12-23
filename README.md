@@ -25,19 +25,20 @@ Nothing at this time.
 Example Playbook
 ----------------
 ```yaml
-    - hosts: client
-      roles:
-         - role: sensu-client
-			sensu_client_gems:
-			  - sensu-plugin
-			sensu_client_plugins:
-			  - sensu-plugins-process-checks
-			sensu_client_checks:
-			  sensu-website:
-				command: check-http.rb -u https://sensuapp.org
-				subscribers:
-				  - all
-				interval: 60
+---
+- hosts: client
+  roles:
+    - role: sensu-client
+      sensu_client_gems:
+        - sensu-plugin
+      sensu_client_plugins:
+        - sensu-plugins-process-checks
+      sensu_client_checks:
+        sensu-website:
+          command: check-http.rb -u https://sensuapp.org
+          subscribers:
+            - all
+          interval: 60
 ```
 
 
