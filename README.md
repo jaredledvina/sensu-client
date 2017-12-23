@@ -32,7 +32,7 @@ Example Playbook
       sensu_client_gems:
         - sensu-plugin
       sensu_client_plugins:
-        - sensu-plugins-process-checks
+        - sensu-plugins-http
       sensu_client_checks:
         sensu-website:
           command: check-http.rb -u https://sensuapp.org
