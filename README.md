@@ -15,7 +15,7 @@ Requirements
 Role Variables
 --------------
 
-See `vars/main.yml`
+See [`defaults/main.yml`](https://github.com/jaredledvina/sensu-client/blob/defaults/vars/main.yml)
 
 Dependencies
 ------------
@@ -24,11 +24,21 @@ Nothing at this time.
 
 Example Playbook
 ----------------
-
+```yaml
     - hosts: client
       roles:
-         - sensu-client
-           sensu_client_rabbitmq_host: mycoool.rabbitmq.host.com
+         - role: sensu-client
+			sensu_client_gems:
+			  - sensu-plugin
+			sensu_client_plugins:
+			  - sensu-plugins-process-checks
+			sensu_client_checks:
+			  sensu-website:
+				command: check-http.rb -u https://sensuapp.org
+				subscribers:
+				  - all
+				interval: 60
+```
 
 
 Development:
