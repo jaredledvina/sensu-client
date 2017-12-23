@@ -1,4 +1,4 @@
 {{ ansible_managed | comment }}
 {% for key, value in sensu_client_defaults|dictsort %}
-{{ key|upper|trim }}="{{ value|lower|trim }}"
+{{ key|upper|trim }}={{ value|lower|trim }}
 {% endfor %}
