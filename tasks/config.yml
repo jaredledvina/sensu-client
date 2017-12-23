@@ -1,4 +1,14 @@
 ---
+- name: Ensure /etc/default/sensu exists
+  template:
+    src: sensu-defaults.j2
+    dest: /etc/default/sensu
+    owner: sensu
+    group: sensu
+    mode: 0660
+  when: sensu_client_defaults is defined
+  notify: restart sensu-client
+
 - name: Ensure client config exists
   template:
     src: client.json.j2

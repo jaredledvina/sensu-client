@@ -17,3 +17,6 @@ sensu_client_rabbitmq:
     vhost: /sensu
     user: sensu
     password: sensu
+
+sensu_client_defaults:
+  embedded_ruby: true
