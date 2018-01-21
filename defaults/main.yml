@@ -18,5 +18,14 @@ sensu_client_rabbitmq:
     user: sensu
     password: sensu
 
+sensu_client_redis:
+  redis:
+    host: localhost
+    port: 6379
+    password: sensu
+    db: 0
+    auto_reconnect: true
+    reconnect_on_error: false
+
 sensu_client_defaults:
   embedded_ruby: true
